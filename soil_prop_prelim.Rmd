@@ -18,7 +18,7 @@ library(dplyr)
 library(stringr)
 library(viridis)
 
-soil_props <- read.csv("cleaner_master_20211030.csv", header=T, na.strings=c("", " ", "NA"))
+soil_props <- read.csv("cleaner_master_20211031.csv", header=T, na.strings=c("", " ", "NA"))
 head(soil_props)
 str(soil_props)
 ```
@@ -28,8 +28,21 @@ str(soil_props)
 Checking groups of data for cleanliness
 
 ```{r }
-soil_props <- 
+C2<- soil_props %>% filter(treatment == "C2")
+view(C2)
 
+C2.bd<- soil_props %>% 
+  filter(treatment == "C2" & !is.na(bd))
+view(C2.bd)
+
+C2.bd.min <- soil_props %>% 
+  filter(treatment == "C2" & !is.na(bd) & horizon != "O")
+view(C2.bd.min)
 
 ```
 
+
+```{r }
+
+
+```
