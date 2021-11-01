@@ -1,0 +1,35 @@
+---
+title: "soil_prop_prelim"
+author: "Sara DeLaurentis"
+date: "10/30/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+Setup: Load packages and .csv
+
+```{r }
+library(tidyverse)
+library(dplyr)
+library(stringr)
+library(viridis)
+
+soil_props <- read.csv("cleaner_master_20211030.csv", header=T, na.strings=c("", " ", "NA"))
+head(soil_props)
+str(soil_props)
+```
+
+## Including Plots
+
+Checking groups of data for cleanliness
+
+```{r }
+soil_props <- 
+
+
+```
+
