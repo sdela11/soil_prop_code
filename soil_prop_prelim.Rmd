@@ -18,28 +18,53 @@ library(dplyr)
 library(stringr)
 library(viridis)
 
-soil_props <- read.csv("cleaner_master_20211031.csv", header=T, na.strings=c("", " ", "NA"))
-head(soil_props)
-str(soil_props)
+
+OA_thick <- read.csv("OA_thickness_2019_20_join.csv", header=T, na.strings=c("", " ", "NA"))
+head(OA_thick)
+str(OA_thick)
+view(OA_thick)
+
 ```
+
+
+Adding columns for treatment, forest type. 
+```{r }
+
+
+```
+
+
 
 ## Including Plots
 
 Checking groups of data for cleanliness
 
 ```{r }
-C2<- soil_props %>% filter(treatment == "C2")
+C2<- OA_thick %>% filter(treatment == "C2")
 view(C2)
 
-C2.bd<- soil_props %>% 
-  filter(treatment == "C2" & !is.na(bd))
-view(C2.bd)
+C5<- OA_thick %>% filter(treatment == "C5")
+view(C5)
 
-C2.bd.min <- soil_props %>% 
-  filter(treatment == "C2" & !is.na(bd) & horizon != "O")
-view(C2.bd.min)
+D2<- OA_thick %>% filter(treatment == "D2")
+view(D2)
+
+D5<- OA_thick %>% filter(treatment == "D5")
+view(D5)
+
+
+## keep this code, but I'm not going into bulk density analysis yet. This will read out the bulk density values, minus any NA values in the column.
+D2.bd<- OA_thick %>% 
+  filter(treatment == "D2" & !is.na(bulk_density))
+view(D2.bd)
+
+D2.bd.min <- OA_thick %>% 
+  filter(treatment == "D2" & !is.na(bd) & horizon != "O")
+view(D2.bd.min)
 
 ```
+
+
 
 
 ```{r }
