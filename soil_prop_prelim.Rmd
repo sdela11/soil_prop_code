@@ -63,7 +63,7 @@ D2.bd.min <- OA_thick %>%
 view(D2.bd.min)
 
 ```
-
+##summarize O horizon thicknesses, by site, across 2019-2020
 
 
 
