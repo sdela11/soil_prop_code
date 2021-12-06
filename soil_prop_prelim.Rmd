@@ -98,6 +98,7 @@ view(D2.bd.min)
 ```{r }
 
 O_mean_summ <-  OA_thick %>% 
+  drop_na(totalO_thk) %>% 
   group_by(site) %>% 
   summarize(mean_O_thk = mean(totalO_thk), mean_A_thk = mean(A_thk))
 
