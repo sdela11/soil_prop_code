@@ -26,6 +26,8 @@ as.tbl(OA_thick) #set as tibble. was having issues with coercing to a dataframe 
 str(OA_thick)
 head(OA_thick)
 
+#set all data types for the dataframe
+
 OA_thick$date %>% as.Date()
 OA_thick$site %>%  as.character()
 OA_thick$treatment %>%  as.character()
@@ -47,7 +49,7 @@ str(OA_thick)
 ```
 
 
-Adding columns for treatment, forest type. 
+ 
 ```{r }
 
 
@@ -94,10 +96,11 @@ view(D2.bd.min)
 
 
 ```{r }
+
 O_mean_summ <-  OA_thick %>% 
-  group_by(treatment) %>% 
+  group_by(site) %>% 
   summarize(mean_O_thk = mean(totalO_thk), mean_A_thk = mean(A_thk))
 
-
+view(O_mean_summ)
 
 ```
