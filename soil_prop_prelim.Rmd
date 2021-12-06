@@ -20,11 +20,14 @@ library(viridis)
 
 
 OA_thick <- read.csv("OA_thickness_2019_20_join.csv", header=T, na.strings=c("", " ", "NA"))
+class(OA_thick)
 
 as.tbl(OA_thick) #set as tibble. was having issues with coercing to a dataframe (using as.data.frame)
 
 str(OA_thick)
 head(OA_thick)
+
+OA_thick[46,11] <- as.numeric(13) #depending on where the last source file was saved from, this cell may be imported as a date. The correct value should be 13 (cm). D5A R2 (2019), A_thk = 13.
 
 #set all data types for the dataframe
 
@@ -44,7 +47,7 @@ OA_thick$source %>% as.character()
 OA_thick$sample_number %>% as.character()
 OA_thick$bulk_density %>% as.numeric()
 
-OA_thick[46,11] <- as.numeric(13) #depending on where the last source file was saved from, this cell may be imported as a date. The correct value should be 13 (cm). D5A R2 (2019), A_thk = 13.
+
 
 
 str(OA_thick)
@@ -111,7 +114,7 @@ view(O_mean_summ)
 A_mean_summ <- OA_thick %>% 
   drop_na(A_thk)
 
-view(A_mean_summ)
+
 %>% 
   group_by(site) %>% 
   summarize(mean_A_thk = mean(A_thk), n = length(site))
