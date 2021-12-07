@@ -5,6 +5,7 @@ date: "10/30/2021"
 output: html_document
 ---
 
+#12/07/2021 May need to change file title soon? At some point I will separate out the different components of this document and rename.
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -17,32 +18,144 @@ library(tidyverse)
 library(dplyr)
 library(stringr)
 library(viridis)
+library(magrittr)
 
-soil_props <- read.csv("cleaner_master_20211031.csv", header=T, na.strings=c("", " ", "NA"))
-head(soil_props)
-str(soil_props)
+
+OA_thick <- read.csv("OA_thickness_2019_20_join.csv", header=T, na.strings=c("", " ", "NA"))
+class(OA_thick)
+
+#as.tbl(OA_thick) #set as tibble. was having issues with coercing to a dataframe (using as.data.frame)
+
+str(OA_thick)
+head(OA_thick)
+
+OA_thick[46,11] <- as.numeric(13) #depending on where the last source file was saved from, this cell may be imported as a date. The correct value should be 13 (cm). D5A R2 (2019), A_thk = 13.
+
+#set all data types for the dataframe
+
+OA_thick$date %>% as.Date()
+OA_thick$site %>%  as.character()
+OA_thick$treatment %>%  as.character()
+OA_thick$forest_type %>%  as.character()
+OA_thick$inv_lvl %>% as.numeric()
+OA_thick$plot %>% as.character()
+OA_thick$totalO_thk %>% as.numeric()
+OA_thick$Oi_thk %>% as.numeric()
+OA_thick$Oe_thk %>% as.numeric()
+OA_thick$Oa_thk %>% as.numeric()
+OA_thick$A_thk %>% as.numeric()
+OA_thick$A_type %>% as.character()
+OA_thick$source %>% as.character()
+OA_thick$sample_number %>% as.character()
+OA_thick$bulk_density %>% as.numeric()
+
+
+
+
+str(OA_thick)
+view(OA_thick)
+
 ```
+
+
+ 
+```{r }
+
+
+```
+
+
 
 ## Including Plots
 
 Checking groups of data for cleanliness
 
+#```{r } # commented out when not needed.
+C2<- OA_thick %>% filter(treatment == "C2")#view(C2)
+length(C2)
+
+C5<- OA_thick %>% filter(treatment == "C5")
+view(C5)
+length(C5)
+
+D2<- OA_thick %>% filter(treatment == "D2")
+view(D2)
+length(D2)
+
+D5<- OA_thick %>% filter(treatment == "D5")
+view(D5)
+length(D5)
+
+
+
+
+## keep this code, but I'm not going into bulk density analysis yet. This will read out the bulk density values, minus any NA values in the column.
+D2.bd<- OA_thick %>% 
+  filter(treatment == "D2" & !is.na(bulk_density))
+view(D2.bd)
+
+D2.bd.min <- OA_thick %>% 
+  filter(treatment == "D2" & !is.na(bulk_density) & horizon != "O")
+view(D2.bd.min)
+
+```
+##summarize O horizon thicknesses, by site, across 2019-2020
+
+
+
 ```{r }
-C2<- soil_props %>% filter(treatment == "C2")
-view(C2)
 
-C2.bd<- soil_props %>% 
-  filter(treatment == "C2" & !is.na(bd))
-view(C2.bd)
+#O_mean_summary
+O_mean_sum <- OA_thick %>% 
+group_by(site) %>% 
+  drop_na(totalO_thk) %>% 
+  summarize(mean_O_thk = mean(mean(totalO_thk)), SD = sd(totalO_thk), n = length(site))
 
-C2.bd.min <- soil_props %>% 
-  filter(treatment == "C2" & !is.na(bd) & horizon != "O")
-view(C2.bd.min)
+O_mean_sum %<>%   #Adding in SE to the dataframe  
+mutate(SE = SD/sqrt(length(SD)))
+view(O_mean_sum)
+
+#A_mean_summary
+A_mean_sum <- OA_thick %>% 
+group_by(site) %>% 
+  drop_na(A_thk) %>% 
+  summarize(mean_A_thk = mean(mean(A_thk)), SD = sd(A_thk), n = length(site))
+
+A_mean_sum %<>%   #Adding in SE to the dataframe  
+mutate(SE = SD/sqrt(length(SD)))
+view(A_mean_sum)
+
+```
+
+Re-used from worm_plotting code
+```{r }
+
+O_plot.FUN <- function(data){
+  Oplot <- ggplot(___, aes(x = site, y = mean, fill = treatment)) +
+  scale_fill_viridis(discrete = TRUE) +
+  geom_col(position = position_dodge()) +
+  geom_errorbar(aes(ymin = mean-SE, ymax = mean+SE),
+                width = .2,
+                position = position_dodge(.9))
+  Wplot <- Wplot + ggtitle("Itasca 2019 Worms") +
+    theme(plot.title = element_text(size = rel(1.8), margin = margin(b = 10)))+
+    theme(axis.text.x = element_text(size = rel(1.4))) +
+    theme(axis.text.y = element_text(size = rel(1.4))) 
+  Wplot <- Wplot +
+    labs(x= "Site", y = "EW biomass (g/m2)", size = rel(1.8)) +
+    theme(axis.title.x = element_text(size = rel(1.5), face = "bold", margin = margin(t = 8)))+
+    theme(axis.title.y = element_text(size = rel(1.5), face = "bold", margin = margin(r = 8)))+
+    theme(legend.text = element_text(size = rel(1.4))) +
+    theme(legend.title = element_text(size = rel(1.4)))
+  
+ print(Wplot) #print
+}
+
+wormplot.FUN(wormplot.df) #run the function
 
 ```
 
 
-```{r }
 
 
 ```
