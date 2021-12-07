@@ -144,15 +144,21 @@ Step 2: create a dot plot, with labeled points of different colors.
 #Step 1:
 O <- O_mean_sum$mean_O_thk
 A <- A_mean_sum$mean_A_thk
-view(O)
-view(A)
+#view(O)
+#view(A)
 
 OA_means.df <- cbind(O,A)
+as.data.frame(OA_means.df)
 rownames(OA_means.df) = c("C2A","C2B","C5A","C5B","D2A","D2B","D5A","D5B")
 
+
 view(OA_means.df)
+str(OA_means.df)
 
-
+#Step 2:
+qplot(O, A, data = OA_means.df, label = rownames(OA_means.df), 
+      geom=c("point", "text"),
+      hjust=0, vjust=0)
 
 
 ```
