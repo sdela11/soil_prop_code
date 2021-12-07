@@ -18,7 +18,7 @@ library(tidyverse)
 library(dplyr)
 library(stringr)
 library(viridis)
-
+library(magrittr)
 
 
 OA_thick <- read.csv("OA_thickness_2019_20_join.csv", header=T, na.strings=c("", " ", "NA"))
