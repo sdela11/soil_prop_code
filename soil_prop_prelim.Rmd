@@ -105,20 +105,6 @@ view(D2.bd.min)
 
 ```{r }
 
-O_mean_summ <-  OA_thick %>% 
-  drop_na(totalO_thk) %>% 
-  group_by(site) %>% 
-  summarize(mean_O_thk = mean(totalO_thk), n = length(site))
-
-view(O_mean_summ)
-
-A_mean_summ <- OA_thick %>% 
-  drop_na(A_thk) %>% 
-  group_by(site) %>% 
-  summarize(mean_A_thk = mean(A_thk), n = length(site))
-
-view(A_mean_summ)
-
 #O_mean_summary
 O_mean_sum <- OA_thick %>% 
 group_by(site) %>% 
@@ -138,5 +124,38 @@ group_by(site) %>%
 A_mean_sum %<>%   #Adding in SE to the dataframe  
 mutate(SE = SD/sqrt(length(SD)))
 view(A_mean_sum)
+
+```
+
+Re-used from worm_plotting code
+```{r }
+
+O_plot.FUN <- function(data){
+  Oplot <- ggplot(___, aes(x = site, y = mean, fill = treatment)) +
+  scale_fill_viridis(discrete = TRUE) +
+  geom_col(position = position_dodge()) +
+  geom_errorbar(aes(ymin = mean-SE, ymax = mean+SE),
+                width = .2,
+                position = position_dodge(.9))
+  Wplot <- Wplot + ggtitle("Itasca 2019 Worms") +
+    theme(plot.title = element_text(size = rel(1.8), margin = margin(b = 10)))+
+    theme(axis.text.x = element_text(size = rel(1.4))) +
+    theme(axis.text.y = element_text(size = rel(1.4))) 
+  Wplot <- Wplot +
+    labs(x= "Site", y = "EW biomass (g/m2)", size = rel(1.8)) +
+    theme(axis.title.x = element_text(size = rel(1.5), face = "bold", margin = margin(t = 8)))+
+    theme(axis.title.y = element_text(size = rel(1.5), face = "bold", margin = margin(r = 8)))+
+    theme(legend.text = element_text(size = rel(1.4))) +
+    theme(legend.title = element_text(size = rel(1.4)))
+  
+ print(Wplot) #print
+}
+
+wormplot.FUN(wormplot.df) #run the function
+
+```
+
+
+
 
 ```
