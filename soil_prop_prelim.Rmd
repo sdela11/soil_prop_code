@@ -19,6 +19,7 @@ library(stringr)
 library(viridis)
 
 
+
 OA_thick <- read.csv("OA_thickness_2019_20_join.csv", header=T, na.strings=c("", " ", "NA"))
 class(OA_thick)
 
@@ -112,13 +113,30 @@ O_mean_summ <-  OA_thick %>%
 view(O_mean_summ)
 
 A_mean_summ <- OA_thick %>% 
-  drop_na(A_thk)
-
-
-%>% 
+  drop_na(A_thk) %>% 
   group_by(site) %>% 
   summarize(mean_A_thk = mean(A_thk), n = length(site))
 
 view(A_mean_summ)
+
+#O_mean_summary
+O_mean_sum <- OA_thick %>% 
+group_by(site) %>% 
+  drop_na(totalO_thk) %>% 
+  summarize(mean_O_thk = mean(mean(totalO_thk)), SD = sd(totalO_thk), n = length(site))
+
+O_mean_sum %<>%   #Adding in SE to the dataframe  
+mutate(SE = SD/sqrt(length(SD)))
+view(O_mean_sum)
+
+#A_mean_summary
+A_mean_sum <- OA_thick %>% 
+group_by(site) %>% 
+  drop_na(A_thk) %>% 
+  summarize(mean_A_thk = mean(mean(A_thk)), SD = sd(A_thk), n = length(site))
+
+A_mean_sum %<>%   #Adding in SE to the dataframe  
+mutate(SE = SD/sqrt(length(SD)))
+view(A_mean_sum)
 
 ```
