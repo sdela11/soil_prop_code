@@ -147,8 +147,8 @@ A <- A_mean_sum$mean_A_thk
 #view(O)
 #view(A)
 
-OA_means.df <- cbind(O,A)
-as.data.frame(OA_means.df)
+OA_means.df <- data.frame(v1=O,v2=A)
+colnames(OA_means.df) = c("O","A")
 rownames(OA_means.df) = c("C2A","C2B","C5A","C5B","D2A","D2B","D5A","D5B")
 
 
