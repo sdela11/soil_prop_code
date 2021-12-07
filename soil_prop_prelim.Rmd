@@ -70,9 +70,8 @@ view(OA_thick)
 
 Checking groups of data for cleanliness
 
-```{r }
-C2<- OA_thick %>% filter(treatment == "C2")
-view(C2)
+#```{r } # commented out when not needed.
+C2<- OA_thick %>% filter(treatment == "C2")#view(C2)
 length(C2)
 
 C5<- OA_thick %>% filter(treatment == "C5")
