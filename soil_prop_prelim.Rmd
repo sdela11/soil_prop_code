@@ -158,7 +158,11 @@ str(OA_means.df)
 #Step 2:
 qplot(O, A, data = OA_means.df, label = rownames(OA_means.df), 
       geom=c("point", "text"),
-      hjust=0, vjust=0)
+      hjust=0, vjust=0,
+      color = O,
+      xlab = "A horizon depth (cm)",
+      ylab = "O horizon depth (cm)",
+      main = "Plot of O horizon vs. A horizon depths (cm) by site")
 
 
 ```
