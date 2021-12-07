@@ -131,6 +131,34 @@ view(A_mean_sum)
 write.table(A_mean_sum, file = "A_mean_sum.csv", sep = ",")
 
 ```
+## Creating an O/A horizon depth plot per site. The final goal will be to plot all available paired points, but step one is to plot the means of each against each other. 
+
+copy and paste this text into an ideas page:
+Ideas for O/A pairs: O/A depths at each hole (rep), or near each hole.
+
+
+Step 1 for plotting of O/A depth means: Create dataframe of O and A horizons.
+
+Step 2: create a dot plot, with labeled points of different colors.
+```{r }
+#Step 1:
+O <- O_mean_sum$mean_O_thk
+A <- A_mean_sum$mean_A_thk
+view(O)
+view(A)
+
+OA_means.df <- cbind(O,A)
+rownames(OA_means.df) = c("C2A","C2B","C5A","C5B","D2A","D2B","D5A","D5B")
+
+view(OA_means.df)
+
+
+
+
+```
+
+
+
 
 Re-used from worm_plotting code
 ```{r }
