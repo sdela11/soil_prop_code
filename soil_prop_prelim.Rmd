@@ -155,13 +155,15 @@ view(OA_means.df)
 str(OA_means.df)
 
 #Step 2:
-qplot(O, A, data = OA_means.df, label = rownames(OA_means.df), 
+OPlot1 <- qplot(O, A, data = OA_means.df, label = site, 
       geom=c("point", "text"),
       hjust=0, vjust=0,
-      color = O,
+      color = treatment,
       xlab = "A horizon depth (cm)",
       ylab = "O horizon depth (cm)",
       main = "Plot of O horizon vs. A horizon depths (cm) by site")
+print(OPlot1)
+
 
 
 ```
@@ -173,27 +175,27 @@ Re-used from worm_plotting code
 ```{r }
 
 O_plot.FUN <- function(data){
-  Oplot <- ggplot(data, aes(x = O, y = A, fill = )) +
+  Oplot <- ggplot(data, aes(x = O, y = A)) +
   scale_fill_viridis(discrete = TRUE) +
-  geom_col(position = position_dodge()) +
-  geom_errorbar(aes(ymin = mean-SE, ymax = mean+SE),
-                width = .2,
-                position = position_dodge(.9))
-  Wplot <- Wplot + ggtitle("Itasca 2019 Worms") +
+  geom_point(position = position_dodge(),
+  color = OA_means.df$treatment,
+  width = 0.2)
+  Oplot <- Oplot + ggtitle("Plot of O horizon vs. A horizon depths (cm) by site") +
     theme(plot.title = element_text(size = rel(1.8), margin = margin(b = 10)))+
     theme(axis.text.x = element_text(size = rel(1.4))) +
     theme(axis.text.y = element_text(size = rel(1.4))) 
-  Wplot <- Wplot +
-    labs(x= "Site", y = "EW biomass (g/m2)", size = rel(1.8)) +
+  Oplot <- Oplot +
+    labs(x= "O horizon depth (cm)", y = "A horizon depth (cm)", size = rel(1.8)) +
     theme(axis.title.x = element_text(size = rel(1.5), face = "bold", margin = margin(t = 8)))+
     theme(axis.title.y = element_text(size = rel(1.5), face = "bold", margin = margin(r = 8)))+
     theme(legend.text = element_text(size = rel(1.4))) +
     theme(legend.title = element_text(size = rel(1.4)))
   
- print(Wplot) #print
+ print(Oplot) #print
 }
 
-wormplot.FUN(wormplot.df) #run the function
+O_plot.FUN(OA_means.df) #run the function
+?geom_point
 
 ```
 
