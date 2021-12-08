@@ -154,6 +154,8 @@ colnames(OA_means.df) = c("site", "treatment", "O","A")
 view(OA_means.df)
 str(OA_means.df)
 
+write.table(OA_means.df, file = "OA_means.csv", sep = ",")
+
 #Step 2:
 OPlot1 <- qplot(O, A, data = OA_means.df, label = site, 
       geom=c("point", "text"),
@@ -193,6 +195,8 @@ O_plot.FUN <- function(data){
   
  print(Oplot) #print
 }
+
+
 
 O_plot.FUN(OA_means.df) #run the function
 ?geom_point
