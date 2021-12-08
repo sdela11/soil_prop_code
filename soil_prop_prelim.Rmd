@@ -147,9 +147,8 @@ A <- A_mean_sum$mean_A_thk
 #view(O)
 #view(A)
 
-OA_means.df <- data.frame(v1=O,v2=A)
-colnames(OA_means.df) = c("O","A")
-rownames(OA_means.df) = c("C2A","C2B","C5A","C5B","D2A","D2B","D5A","D5B")
+OA_means.df <- data.frame(v1 = c("C2A","C2B","C5A","C5B","D2A","D2B","D5A","D5B"), v2 = c("C2", "C2", "C5", "C5", "D2", "D2", "D5", "D5"), v3 = O, v4 = A)
+colnames(OA_means.df) = c("site", "treatment", "O","A")
 
 
 view(OA_means.df)
@@ -174,7 +173,7 @@ Re-used from worm_plotting code
 ```{r }
 
 O_plot.FUN <- function(data){
-  Oplot <- ggplot(___, aes(x = site, y = mean, fill = treatment)) +
+  Oplot <- ggplot(data, aes(x = O, y = A, fill = )) +
   scale_fill_viridis(discrete = TRUE) +
   geom_col(position = position_dodge()) +
   geom_errorbar(aes(ymin = mean-SE, ymax = mean+SE),
