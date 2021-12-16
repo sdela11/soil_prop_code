@@ -133,13 +133,17 @@ view(A_mean_sum)
 ```
 ## Creating an O/A horizon depth plot per site. The final goal will be to plot all available paired points, but step one is to plot the means of each against each other. 
 
+NOTE: This represents an intermediate step and will likely be heavily edited or removed because the FINAL GOAL is to plot ALL available pairs, with means and SE overlay. 
+
 copy and paste this text into an ideas page:
 Ideas for O/A pairs: O/A depths at each hole (rep), or near each hole.
 
 
-Step 1 for plotting of O/A depth means: Create dataframe of O and A horizons.
+Step 1: for plotting of O/A depth means: Create dataframe of O and A horizon means.
 
 Step 2: create a dot plot, with labeled points of different colors.
+
+
 ```{r }
 #Step 1:
 O <- O_mean_sum$mean_O_thk
@@ -156,7 +160,7 @@ str(OA_means.df)
 
 write.table(OA_means.df, file = "OA_means.csv", sep = ",")
 
-#Step 2:
+#Step 2: (this code works but the colors are gross)
 OPlot1 <- qplot(O, A, data = OA_means.df, label = site, 
       geom=c("point", "text"),
       hjust=0, vjust=0,
