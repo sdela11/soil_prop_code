@@ -33,7 +33,7 @@ OA_thick[46,11] <- as.numeric(13) #depending on where the last source file was s
 
 #set all data types for the dataframe
 
-OA_thick$date %>% as.Date()
+OA_thick$date %>% as.Date(format = "%m/%d/%Y")
 OA_thick$site %>%  as.character()
 OA_thick$treatment %>%  as.character()
 OA_thick$forest_type %>%  as.character()
@@ -165,6 +165,8 @@ OPlot1 <- qplot(O, A, data = OA_means.df, label = site,
       ylab = "O horizon depth (cm)",
       main = "Plot of O horizon vs. A horizon depths (cm) by site")
 print(OPlot1)
+
+
 
 
 
