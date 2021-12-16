@@ -204,9 +204,10 @@ Re-used from worm_plotting code.
 ```{r }
 
 O_plot.FUN <- function(data, title, xlab, ylab, xcolumn, ycolumn, color_grp, l.title){
+  
   Oplot <- ggplot(data, aes(x = xcolumn, y = ycolumn)) +
   scale_fill_viridis(discrete = TRUE) +
-  geom_point(aes(colour = (color_grp))) 
+  geom_point(position = position_jitter(h = 0.1, w = 0.1), shape = 16, alpha = 0.5, size = 3, aes(color = (color_grp))) 
 
   Oplot <- Oplot + ggtitle(title) +
     labs(color = l.title) +
@@ -222,8 +223,6 @@ O_plot.FUN <- function(data, title, xlab, ylab, xcolumn, ycolumn, color_grp, l.t
   
  print(Oplot) #print
 }
-
-p <- p + guides(fill=guide_legend(title="New Legend Title"))
 
 O_plot.FUN(OA.graphpairs.df, 
 "O horizon depth vs. A horizon depth by Site", 
