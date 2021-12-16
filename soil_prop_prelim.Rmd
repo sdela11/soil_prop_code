@@ -19,7 +19,7 @@ library(dplyr)
 library(stringr)
 library(viridis)
 library(magrittr)
-
+library(ggsci)
 
 OA_thick <- read.csv("OA_thickness_2019_20_join.csv", header=T, na.strings=c("", " ", "NA"))
 class(OA_thick)
@@ -206,8 +206,9 @@ Re-used from worm_plotting code.
 O_plot.FUN <- function(data, title, xlab, ylab, xcolumn, ycolumn, color_grp, l.title){
   
   Oplot <- ggplot(data, aes(x = xcolumn, y = ycolumn)) +
-  scale_fill_viridis(discrete = TRUE) +
-  geom_point(position = position_jitter(h = 0.1, w = 0.1), shape = 16, alpha = 0.5, size = 3, aes(color = (color_grp))) 
+  geom_point(position = position_jitter(h = 0.1, w = 0.1), shape = 16, alpha = 0.8, size = 3, aes(color = (color_grp))) +
+  scale_color_npg()
+  #scale_color_viridis(discrete = TRUE, option = "C")
 
   Oplot <- Oplot + ggtitle(title) +
     labs(color = l.title) +
@@ -234,7 +235,6 @@ OA.graphpairs.df$site,
 "Site") 
 
 #run the function
-?geom_point
 
 ```
 
