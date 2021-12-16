@@ -175,8 +175,27 @@ print(OPlot1)
 
 
 ```
+##Code to create an O/A depth scatterplot 
+
+I don't like this plot because with the inclusion of C5A and C2A, possibly even C2B, it means nothing. We know the A horizon is the result of human disturbance. For publication in the main text, I would feel much more comfortable taking out C5A and C2A.
+
+Anyways...
+
+Step 1: Create a dataframe of the desired O/A pairs. I will need to include 2021 data when it comes in, how do I do that?
+Points to include: 2019 R1-R3 O and A horizon depths, 2019 O/A depths, 2021 R1-R3 O and A horizon depths.
+
+  -Selection criteria: "Source" == "pit" | "oad" | "oac"
 
 
+```{r }
+
+#create data frame out of desired points:
+
+OA.graphpairs.df <- OA_thick %>% 
+filter(source == "pit" | source == "oad" | source == "oac") 
+
+view(OA.graphpairs.df)
+```
 
 
 Re-used from worm_plotting code
