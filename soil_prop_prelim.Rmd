@@ -133,7 +133,7 @@ view(A_mean_sum)
 ```
 ## Creating an O/A horizon depth plot per site. The final goal will be to plot all available paired points, but step one is to plot the means of each against each other. 
 
-NOTE: This represents an intermediate step and will likely be heavily edited or removed because the FINAL GOAL is to plot ALL available pairs, with means and SE overlay. 
+NOTE: This represents an intermediate step and will likely be heavily edited or removed because the FINAL GOAL is to plot ALL available pairs, with means and SE overlay. See next section for beginning work on the final form!
 
 copy and paste this text into an ideas page:
 Ideas for O/A pairs: O/A depths at each hole (rep), or near each hole.
