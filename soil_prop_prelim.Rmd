@@ -160,7 +160,7 @@ str(OA_means.df)
 
 write.table(OA_means.df, file = "OA_means.csv", sep = ",")
 
-#Step 2: (this code works but the colors are gross)
+#Step 2: (this code works but the colors are gross, and the legend looks bad)
 OPlot1 <- qplot(O, A, data = OA_means.df, label = site, 
       geom=c("point", "text"),
       hjust=0, vjust=0,
@@ -195,24 +195,26 @@ OA.graphpairs.df <- OA_thick %>%
 filter(source == "pit" | source == "oad" | source == "oac") 
 
 view(OA.graphpairs.df)
+
+
 ```
 
 
-Re-used from worm_plotting code
+Re-used from worm_plotting code.
 ```{r }
 
-O_plot.FUN <- function(data){
+O_plot.FUN <- function(data, title, xlab, ylab){
   Oplot <- ggplot(data, aes(x = O, y = A)) +
   scale_fill_viridis(discrete = TRUE) +
   geom_point(position = position_dodge(),
   color = OA_means.df$treatment,
   width = 0.2)
-  Oplot <- Oplot + ggtitle("Plot of O horizon vs. A horizon depths (cm) by site") +
+  Oplot <- Oplot + ggtitle("title") +
     theme(plot.title = element_text(size = rel(1.8), margin = margin(b = 10)))+
     theme(axis.text.x = element_text(size = rel(1.4))) +
     theme(axis.text.y = element_text(size = rel(1.4))) 
   Oplot <- Oplot +
-    labs(x= "O horizon depth (cm)", y = "A horizon depth (cm)", size = rel(1.8)) +
+    labs(x= "xlab", y = "ylab", size = rel(1.8)) +
     theme(axis.title.x = element_text(size = rel(1.5), face = "bold", margin = margin(t = 8)))+
     theme(axis.title.y = element_text(size = rel(1.5), face = "bold", margin = margin(r = 8)))+
     theme(legend.text = element_text(size = rel(1.4))) +
