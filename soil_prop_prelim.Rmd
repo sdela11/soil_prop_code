@@ -115,7 +115,7 @@ O_mean_sum %<>%   #Adding in SE to the dataframe
 mutate(SE = SD/sqrt(length(SD)))
 view(O_mean_sum)
 
-write.table(O_mean_sum, file = "O_mean_sum.csv", sep = ",")
+#write.table(O_mean_sum, file = "O_mean_sum.csv", sep = ",")
 
 
 #A_mean_summary
@@ -128,7 +128,7 @@ A_mean_sum %<>%   #Adding in SE to the dataframe
 mutate(SE = SD/sqrt(length(SD)))
 view(A_mean_sum)
 
-write.table(A_mean_sum, file = "A_mean_sum.csv", sep = ",")
+#write.table(A_mean_sum, file = "A_mean_sum.csv", sep = ",")
 
 ```
 ## Creating an O/A horizon depth plot per site. The final goal will be to plot all available paired points, but step one is to plot the means of each against each other. 
