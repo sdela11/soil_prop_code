@@ -22,11 +22,17 @@ library(viridis)
 library(magrittr)
 library(ggsci)
 
+<<<<<<< HEAD
 getwd()
 
 
 OA_thick <- read.csv("OA_thickness_2019_21_join.csv", header=T, na.strings=c("", " ", "NA"))
 # NO! Don't do this:  OA_thick[is.na(OA_thick)] = 0
+=======
+
+
+OA_thick <- read.csv("OA_thickness_2019_20_clean.csv", header=T, na.strings=c("", " ", "NA"))
+>>>>>>> 4f63c112a224f1b0268b61994e72195a87ebd58f
 class(OA_thick)
 
 #as.tbl(OA_thick) #set as tibble. was having issues with coercing to a dataframe (using as.data.frame)
