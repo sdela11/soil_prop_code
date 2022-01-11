@@ -8,6 +8,7 @@ output: html_document
 #12/07/2021 May need to change file title soon? At some point I will separate out the different components of this document and rename.
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = "C:/Users/sbaue/coding/R_TEMPRY/Itasca_project_19-21")
 ```
 
 ## R Markdown
@@ -21,7 +22,10 @@ library(viridis)
 library(magrittr)
 library(ggsci)
 
-OA_thick <- read.csv("OA_thickness_2019_20_join.csv", header=T, na.strings=c("", " ", "NA"))
+getwd()
+
+
+OA_thick <- read.csv("OA_thickness_2019_21_join.csv", header=T, na.strings=c("", " ", "NA"))
 class(OA_thick)
 
 #as.tbl(OA_thick) #set as tibble. was having issues with coercing to a dataframe (using as.data.frame)
