@@ -22,17 +22,11 @@ library(viridis)
 library(magrittr)
 library(ggsci)
 
-<<<<<<< HEAD
 getwd()
 
 
-OA_thick <- read.csv("OA_thickness_2019_21_join.csv", header=T, na.strings=c("", " ", "NA"))
+OA_thick <- read.csv("OA_thickness_2019_21_clean.csv", header=T, na.strings=c("", " ", "NA"))
 # NO! Don't do this:  OA_thick[is.na(OA_thick)] = 0
-=======
-
-
-OA_thick <- read.csv("OA_thickness_2019_20_clean.csv", header=T, na.strings=c("", " ", "NA"))
->>>>>>> 4f63c112a224f1b0268b61994e72195a87ebd58f
 class(OA_thick)
 
 #as.tbl(OA_thick) #set as tibble. was having issues with coercing to a dataframe (using as.data.frame)
@@ -41,9 +35,6 @@ str(OA_thick)
 head(OA_thick)
 
 OA_thick$A_thk
-OA_thick[46,11]
-
-OA_thick[46,11] <- as.numeric(13) #depending on where the last source file was saved from, this cell may be imported as a date. The correct value should be 13 (cm). D5A R2 (2019), A_thk = 13.
 
 #set all data types for the dataframe
 
@@ -62,8 +53,6 @@ OA_thick$A_type %>% as.character()
 OA_thick$source %>% as.character()
 OA_thick$sample_number %>% as.character()
 OA_thick$bulk_density %>% as.numeric()
-
-
 
 
 str(OA_thick)
@@ -172,7 +161,7 @@ colnames(OA_means.df) = c("site", "treatment", "O","A")
 view(OA_means.df)
 str(OA_means.df)
 
-write.table(OA_means.df, file = "OA_means.csv", sep = ",")
+#write.table(OA_means.df, file = "OA_means.csv", sep = ",")
 
 #Step 2: (this code works but the colors are gross, and the legend looks bad)
 OPlot1 <- qplot(O, A, data = OA_means.df, label = site, 
