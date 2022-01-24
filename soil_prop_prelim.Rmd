@@ -8,8 +8,12 @@ output: html_document
 #12/07/2021 May need to change file title soon? At some point I will separate out the different components of this document and rename.
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_knit$set(root.dir = "C:/Users/sbaue/coding/R_TEMPRY/Itasca_project_19-21")
+#knitr::opts_knit$set(root.dir = "C:/Users/sbaue/coding/R_TEMPRY/Itasca_project_19-21") #for home desktop
+knitr::opts_knit$set(root.dir = "C:/Users/sbaue/coding/Itasca_project_19-20") #for Lenovo Flex. Need to change the "20" to "21".
+
+
 ```
+
 
 ## R Markdown
 Setup: Load packages and .csv
@@ -20,7 +24,7 @@ library(dplyr)
 library(stringr)
 library(viridis)
 library(magrittr)
-library(ggsci)
+#library(ggsci)
 
 getwd()
 
