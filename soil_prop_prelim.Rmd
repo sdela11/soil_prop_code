@@ -29,7 +29,7 @@ library(magrittr)
 getwd()
 
 
-OA_thick <- read.csv("OA_thickness_2019_21_clean_20230325.csv", header=T, na.strings=c("", " ", "NA"))
+OA_thick <- read.csv("../OA_thickness_2019_21_clean_20230325.csv", header=T, na.strings=c("", " ", "NA"))
 # NO! Don't do this:  OA_thick[is.na(OA_thick)] = 0
 class(OA_thick)
 
@@ -42,21 +42,21 @@ OA_thick$A_thk
 
 #set all data types for the dataframe
 
-OA_thick$date %>% as.Date(format = "%m/%d/%Y")
-OA_thick$site %>%  as.character()
-OA_thick$treatment %>%  as.character()
-OA_thick$forest_type %>%  as.character()
-OA_thick$inv_lvl %>% as.numeric()
-OA_thick$plot %>% as.character()
-OA_thick$totalO_thk %>% as.numeric()
-OA_thick$Oi_thk %>% as.numeric()
-OA_thick$Oe_thk %>% as.numeric()
-OA_thick$Oa_thk %>% as.numeric()
-OA_thick$A_thk %>% as.numeric()
-OA_thick$A_type %>% as.character()
-OA_thick$source %>% as.character()
-OA_thick$sample_number %>% as.character()
-OA_thick$bulk_density %>% as.numeric()
+OA_thick$date <- as.Date(OA_thick$date, format = "%m/%d/%Y")
+OA_thick$site <- as.character(OA_thick$site)
+OA_thick$treatment <-  as.character(OA_thick$treatment)
+OA_thick$forest_type <-  as.character(OA_thick$forest_type)
+OA_thick$inv_lvl <- as.character(OA_thick$inv_lvl)
+OA_thick$plot <- as.character(OA_thick$plot)
+OA_thick$totalO_thk <- as.numeric(OA_thick$totalO_thk)
+OA_thick$Oi_thk <- as.numeric(OA_thick$Oi_thk)
+OA_thick$Oe_thk <- as.numeric(OA_thick$Oe_thk)
+OA_thick$Oa_thk <- as.numeric(OA_thick$Oa_thk)
+OA_thick$A_thk <- as.numeric(OA_thick$A_thk)
+OA_thick$A_type <- as.character(OA_thick$A_type)
+OA_thick$source <- as.character(OA_thick$source)
+OA_thick$sample_number <- as.character(OA_thick$sample_number)
+OA_thick$bulk_density <- as.numeric(OA_thick$bulk_density)
 
 
 str(OA_thick)
@@ -179,7 +179,7 @@ print(OPlot1)
 
 
 
-
+class(OA_thick$inv_lvl)
 
 ```
 ##Code to create an O/A depth scatterplot 
@@ -211,14 +211,15 @@ Re-used from worm_plotting code.
 ```{r }
 
 O_plot.FUN <- function(data, title, xlab, ylab, xcolumn, ycolumn, color_grp, l.title){
-  
+
   Oplot <- ggplot(data, aes(x = xcolumn, y = ycolumn)) +
-  geom_point(position = position_jitter(h = 0.1, w = 0.1), shape = 16, alpha = 0.8, size = 3, aes(color = (color_grp))) +
-  scale_color_npg()
+  geom_point(position = position_jitter(h = 0.1, w = 0.1), alpha = 0.8, size = 3, aes(shape = inv_lvl, color = color_grp)) +
+  scale_color_grey()
   #scale_color_viridis(discrete = TRUE, option = "C")
 
   Oplot <- Oplot + ggtitle(title) +
-    labs(color = l.title) +
+    labs(color = l.title.one) + #legend label for colors
+    labs(shape = l.title.two) + #legend label for shapes
     theme(plot.title = element_text(size = rel(1.8), margin = margin(b = 10)))+
     theme(axis.text.x = element_text(size = rel(1.4))) +
     theme(axis.text.y = element_text(size = rel(1.4))) 
@@ -238,10 +239,12 @@ O_plot.FUN(OA.graphpairs.df,
 "A horizon depth (cm)",
 OA.graphpairs.df$totalO_thk,
 OA.graphpairs.df$A_thk,
-OA.graphpairs.df$site,
-"Site") 
+OA.graphpairs.df$treatment,
+#OA.graphpairs.df$site,
+"Treatment") 
 
 #run the function
+
 
 ```
 
