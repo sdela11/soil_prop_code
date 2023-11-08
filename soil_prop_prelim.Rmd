@@ -210,11 +210,12 @@ view(OA.graphpairs.df)
 Re-used from worm_plotting code.
 ```{r }
 
-O_plot.FUN <- function(data, title, xlab, ylab, xcolumn, ycolumn, color_grp, l.title){
+O_plot.FUN <- function(data, title, xlab, ylab, xcolumn, ycolumn, color_grp, l.title.one, l.title.two){
 
   Oplot <- ggplot(data, aes(x = xcolumn, y = ycolumn)) +
-  geom_point(position = position_jitter(h = 0.1, w = 0.1), alpha = 0.8, size = 3, aes(shape = inv_lvl, color = color_grp)) +
-  scale_color_grey()
+  geom_point(position = position_jitter(h = 0.1, w = 0.1), alpha = 0.8, size = 3, aes(shape = color_grp, color = inv_lvl)) +
+  scale_color_grey(start = 0.2, end = 0.4)+
+  scale_shape_manual(values = c(17,2,16,1))
   #scale_color_viridis(discrete = TRUE, option = "C")
 
   Oplot <- Oplot + ggtitle(title) +
@@ -241,7 +242,8 @@ OA.graphpairs.df$totalO_thk,
 OA.graphpairs.df$A_thk,
 OA.graphpairs.df$treatment,
 #OA.graphpairs.df$site,
-"Treatment") 
+"Invasion Level", #color
+"Treatment")  #shape
 
 #run the function
 
