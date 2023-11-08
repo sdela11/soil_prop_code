@@ -29,7 +29,7 @@ library(magrittr)
 getwd()
 
 
-OA_thick <- read.csv("OA_thickness_2019_21_clean.csv", header=T, na.strings=c("", " ", "NA"))
+OA_thick <- read.csv("OA_thickness_2019_21_clean_20230325.csv", header=T, na.strings=c("", " ", "NA"))
 # NO! Don't do this:  OA_thick[is.na(OA_thick)] = 0
 class(OA_thick)
 
