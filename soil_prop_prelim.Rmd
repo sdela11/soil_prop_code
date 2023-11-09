@@ -235,7 +235,8 @@ O_plot.FUN <- function(data, title, xlab, ylab, xcolumn, ycolumn, color_grp, l.t
 }
 
 O_plot.FUN(OA.graphpairs.df, 
-"O horizon depth vs. A horizon depth by Site", 
+"Relationship between O horizon depth
+and A horizon depth", 
 "O horizon depth (cm)", 
 "A horizon depth (cm)",
 OA.graphpairs.df$totalO_thk,
