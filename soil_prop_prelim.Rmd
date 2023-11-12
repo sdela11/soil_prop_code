@@ -152,6 +152,7 @@ Step 2: create a dot plot, with labeled points of different colors.
 
 
 ```{r }
+
 #Step 1:
 O <- O_mean_sum$mean_O_thk
 A <- A_mean_sum$mean_A_thk
