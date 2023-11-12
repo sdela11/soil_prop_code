@@ -1,0 +1,73 @@
+---
+title: "O_ANOVA"
+author: "Sara DeLaurentis"
+date: "11/12/2023"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+Setup: Load packages and .csv
+
+```{r }
+
+library(tidyverse)
+library(dplyr)
+library(stringr)
+library(viridis)
+library(magrittr)
+#library(ggsci)
+
+#getwd()
+
+
+OA_thick <- read.csv("../OA_thickness_2019_21_clean_20230325.csv", header=T, na.strings=c("", " ", "NA"))
+# NO! Don't do this:  OA_thick[is.na(OA_thick)] = 0
+class(OA_thick)
+
+#as.tbl(OA_thick) #set as tibble. was having issues with coercing to a dataframe (using as.data.frame)
+
+str(OA_thick)
+head(OA_thick)
+
+OA_thick$A_thk
+
+#set all data types for the dataframe
+
+OA_thick$date <- as.Date(OA_thick$date, format = "%m/%d/%Y")
+OA_thick$site <- as.character(OA_thick$site)
+OA_thick$treatment <-  as.character(OA_thick$treatment)
+OA_thick$forest_type <-  as.character(OA_thick$forest_type)
+OA_thick$inv_lvl <- as.character(OA_thick$inv_lvl)
+OA_thick$plot <- as.character(OA_thick$plot)
+OA_thick$totalO_thk <- as.numeric(OA_thick$totalO_thk)
+OA_thick$Oi_thk <- as.numeric(OA_thick$Oi_thk)
+OA_thick$Oe_thk <- as.numeric(OA_thick$Oe_thk)
+OA_thick$Oa_thk <- as.numeric(OA_thick$Oa_thk)
+OA_thick$A_thk <- as.numeric(OA_thick$A_thk)
+OA_thick$A_type <- as.character(OA_thick$A_type)
+OA_thick$source <- as.character(OA_thick$source)
+OA_thick$sample_number <- as.character(OA_thick$sample_number)
+OA_thick$bulk_density <- as.numeric(OA_thick$bulk_density)
+
+
+str(OA_thick)
+view(OA_thick)
+
+```
+
+
+```{r }
+
+#create data frame out of desired points:
+
+OA.graphpairs.df <- OA_thick %>% 
+filter(source == "pit" | source == "oad" | source == "oac") 
+
+view(OA.graphpairs.df)
+
+
+```
