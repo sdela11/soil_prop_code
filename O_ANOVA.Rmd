@@ -69,5 +69,12 @@ filter(source == "pit" | source == "oad" | source == "oac")
 
 view(OA.graphpairs.df)
 
+```
+
+
+```{r ANOVA.one}
+
+
+
 
 ```
