@@ -79,18 +79,22 @@ view(OA.graphpairs.df)
 C2.O <-  OA.graphpairs.df %>% filter(treatment == "C2") %>% 
   select(totalO_thk)
 view(C2.O)
+sd(C2.O$totalO_thk)
 
 C5.O <- OA.graphpairs.df %>% filter(treatment == "C5") %>% 
   select(totalO_thk)
 view(C5.O)
+sd(C5.O$totalO_thk)
   
 D2.O <- OA.graphpairs.df %>% filter(treatment == "D2") %>% 
   select(totalO_thk)
 view(D2.O)
+sd(D2.O$totalO_thk)
 
 D5.O <- OA.graphpairs.df %>% filter(treatment == "D5") %>% 
   select(totalO_thk)
 view(D5.O)
+sd(D5.O$totalO_thk)
 
 t.test(C2.O, C5.O, mu = 0, var.equal=T)
 
@@ -105,10 +109,12 @@ t.test(D2.O, D5.O, mu = 0, var.equal=T)
 INV2.O <-  OA.graphpairs.df %>% filter(inv_lvl == "2") %>% 
   select(totalO_thk)
 view(INV2.O)
+sd(INV2.O$totalO_thk)
 
 INV5.O <- OA.graphpairs.df %>% filter(inv_lvl == "5") %>% 
   select(totalO_thk)
 view(INV5.O)
+sd(INV5.O$totalO_thk)
 
 t.test(INV2.O, INV5.O, mu = 0, var.equal = T)
 
