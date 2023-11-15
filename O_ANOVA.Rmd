@@ -72,8 +72,29 @@ view(OA.graphpairs.df)
 ```
 
 
-```{r ANOVA.one}
+```{r t.test.one}
 
+#FORM: t.test(group1, group2, mu=0, var.equal=T)
+
+C2.O <-  OA.graphpairs.df %>% filter(treatment == "C2") %>% 
+  select(totalO_thk)
+view(C2.O)
+
+C5.O <- OA.graphpairs.df %>% filter(treatment == "C5") %>% 
+  select(totalO_thk)
+view(C5.O)
+  
+D2.O <- OA.graphpairs.df %>% filter(treatment == "D2") %>% 
+  select(totalO_thk)
+view(D2.O)
+
+D5.O <- OA.graphpairs.df %>% filter(treatment == "D5") %>% 
+  select(totalO_thk)
+view(D5.O)
+
+t.test(C2.O, C5.O, mu = 0, var.equal=T)
+
+t.test(D2.O, D5.O, mu = 0, var.equal=T)
 
 
 
