@@ -99,3 +99,17 @@ t.test(D2.O, D5.O, mu = 0, var.equal=T)
 
 
 ```
+
+```{r t.test.two}
+
+INV2.O <-  OA.graphpairs.df %>% filter(inv_lvl == "2") %>% 
+  select(totalO_thk)
+view(INV2.O)
+
+INV5.O <- OA.graphpairs.df %>% filter(inv_lvl == "5") %>% 
+  select(totalO_thk)
+view(INV5.O)
+
+t.test(INV2.O, INV5.O, mu = 0, var.equal = T)
+
+```
