@@ -213,22 +213,23 @@ Re-used from worm_plotting code.
 
 ```{r }
 
-O_plot.FUN <- function(data, title, xlab, ylab, xcolumn, ycolumn, color_grp, l.title.one, l.title.two){
+O_plot.FUN <- function(data, title, xlab, ylab, xcolumn, ycolumn, color_grp, l.title.one){
 
 #png(file = filename, width = 1000, height = 1000)
 
   Oplot <- ggplot(data, aes(x = xcolumn, y = ycolumn)) +
-  geom_point(position = position_jitter(h = 0.1, w = 0.1), alpha = 0.8, size = 3, aes(shape = color_grp, color = inv_lvl)) +
+  geom_point(position = position_jitter(h = 0.1, w = 0.1), alpha = 0.8, size = 3, aes(shape = color_grp, color = color_grp)) +
 #  geom_smooth(method=lm, se=FALSE, size=0.8, linetype = "dashed", color = "black") +
 stat_poly_line(se = FALSE) +
-stat_poly_eq(use_label(c("eq", "R2")), hjust = -0.5, vjust = 0.2) +
-  scale_color_grey(start = 0.2, end = 0.4)+
+stat_poly_eq(use_label(c("eq", "R2")), hjust = -1.0, vjust = 0.6) +
+  scale_color_manual(values = c("#000000", "#000000", "#000000", "#000000"))+
+ # scale_fill_manual(values = c("#000000", "#FFFFFF", "#000000", "#FFFFFF")) +
   scale_shape_manual(values = c(17,2,16,1))
   #scale_color_viridis(discrete = TRUE, option = "C")
 
   Oplot <- Oplot + ggtitle(title) +
     labs(color = l.title.one) + #legend label for colors
-    labs(shape = l.title.two) + #legend label for shapes
+    labs(shape = l.title.one) + #legend label for shapes
     theme(plot.title = element_text(size = rel(1.8), margin = margin(b = 10)))+
     theme(axis.text.x = element_text(size = rel(1.4))) +
     theme(axis.text.y = element_text(size = rel(1.4))) 
@@ -239,6 +240,7 @@ stat_poly_eq(use_label(c("eq", "R2")), hjust = -0.5, vjust = 0.2) +
     theme(legend.text = element_text(size = rel(1.4))) +
     theme(legend.title = element_text(size = rel(1.4)))
   
+  
  return(Oplot) #print
  dev.off()
  
@@ -246,16 +248,14 @@ stat_poly_eq(use_label(c("eq", "R2")), hjust = -0.5, vjust = 0.2) +
 
 
 O_plot <- O_plot.FUN(OA.graphpairs.df, 
-"TEST Relationship between O horizon depth
+"Relationship between O horizon depth
 and A horizon depth", 
 "O horizon depth (cm)", 
 "A horizon depth (cm)",
 OA.graphpairs.df$totalO_thk,
 OA.graphpairs.df$A_thk,
-OA.graphpairs.df$treatment,
-#OA.graphpairs.df$site,
-"Invasion Level", #color
-"Treatment")  #shape
+OA.graphpairs.df$treatment, 
+"Treatment")  #color and shape
 
 class(O_plot)
 print(O_plot)
