@@ -221,7 +221,7 @@ O_plot.FUN <- function(data, title, xlab, ylab, xcolumn, ycolumn, color_grp, l.t
   geom_point(position = position_jitter(h = 0.1, w = 0.1), alpha = 0.8, size = 3, aes(shape = color_grp, color = color_grp)) +
 #  geom_smooth(method=lm, se=FALSE, size=0.8, linetype = "dashed", color = "black") +
 stat_poly_line(se = FALSE) +
-stat_poly_eq(use_label(c("eq", "R2")), hjust = -1.0, vjust = 0.6) +
+stat_poly_eq(use_label(c("eq", "R2")), hjust = -1.0, vjust = 0.6, size = 5.0) +
   scale_color_manual(values = c("#000000", "#000000", "#000000", "#000000"))+
  # scale_fill_manual(values = c("#000000", "#FFFFFF", "#000000", "#FFFFFF")) +
   scale_shape_manual(values = c(17,2,16,1))
