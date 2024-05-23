@@ -3,6 +3,8 @@ title: "O_ANOVA"
 author: "Sara DeLaurentis"
 date: "11/12/2023"
 output: html_document
+purpose: t-testing on O horizon thicknesses
+files needed: OA_thickness_2019_21_clean_20230325.csv
 ---
 
 ```{r setup, include=FALSE}
@@ -24,7 +26,7 @@ library(magrittr)
 #getwd()
 
 
-OA_thick <- read.csv("../OA_thickness_2019_21_clean_20230325.csv", header=T, na.strings=c("", " ", "NA"))
+OA_thick <- read.csv("../OA_thickness_2019_21_clean_20230325.csv", header=T, na.strings=c("", " ", "NA")) #insert NA for blanks, spaces and "NA"
 # NO! Don't do this:  OA_thick[is.na(OA_thick)] = 0
 class(OA_thick)
 
@@ -65,7 +67,9 @@ view(OA_thick)
 #create data frame out of desired points:
 
 OA.graphpairs.df <- OA_thick %>% 
-filter(source == "pit" | source == "oad" | source == "oac") 
+filter(source == "pit" | source == "oad" | source == "oac") #only select rows where the source column is "pit" : soil pit R1, R2, or R3, 
+# "oad" : OA depth measurement, OR
+# "oac" :
 
 view(OA.graphpairs.df)
 
