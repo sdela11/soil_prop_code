@@ -1,8 +1,11 @@
 ---
 title: "soil_prop_prelim"
 author: "Sara DeLaurentis"
-date: "10/30/2021"
+date: "05/22/2024"
 output: html_document
+purpose: create O and A horizon summaries, create OA horizon relationship plot.
+files needed: OA_thickness_2019_21_clean_20230325.csv
+  
 ---
 
 #12/07/2021 May need to change file title soon? At some point I will separate out the different components of this document and rename.
@@ -30,7 +33,7 @@ library(ggpmisc)
 #getwd()
 
 
-OA_thick <- read.csv("../OA_thickness_2019_21_clean_20230325.csv", header=T, na.strings=c("", " ", "NA"))
+OA_thick <- read.csv("../OA_thickness_2019_21_clean_20230325.csv", header=T, na.strings=c("", " ", "NA")) # set blanks, spaces, and "NA" to NA.
 # NO! Don't do this:  OA_thick[is.na(OA_thick)] = 0
 class(OA_thick)
 
@@ -109,9 +112,7 @@ view(D2.bd.min)
 ```
 ##summarize O horizon thicknesses, by site, across 2019-2020
 
-
-
-```{r }
+```{r O summary}
 
 #O_mean_summary
 
@@ -126,6 +127,11 @@ view(O_mean_sum)
 
 #write.table(O_mean_sum, file = "O_mean_sum.csv", sep = ",")
 
+```
+
+##summarize A horizon thicknesses, by site, across 2019-2020
+
+```{r A summary}
 
 #A_mean_summary
 A_mean_sum <- OA_thick %>% 
@@ -154,7 +160,8 @@ Step 1: for plotting of O/A depth means: Create dataframe of O and A horizon mea
 Step 2: create a dot plot, with labeled points of different colors.
 
 
-```{r }
+```{r OPlot trial one}
+
 #Step 1:
 O <- O_mean_sum$mean_O_thk
 A <- A_mean_sum$mean_A_thk
@@ -207,6 +214,7 @@ filter(source == "pit" | source == "oad" | source == "oac")
 
 view(OA.graphpairs.df)
 
+write_csv(OA.graphpairs.df, "OA_graphpairs.csv")
 
 ```
 
@@ -249,39 +257,22 @@ print(Oplot)
  
 }
 
+#Function input:
 
-O_plot <- O_plot.FUN(OA.graphpairs.df,
-"Relationship between O horizon depth
-and A horizon depth", 
-"O horizon depth (cm)", 
-"A horizon depth (cm)",
-OA.graphpairs.df$totalO_thk,
-OA.graphpairs.df$A_thk,
-OA.graphpairs.df$treatment, 
-"Treatment")  #color and shape
+O_plot <- O_plot.FUN(OA.graphpairs.df, #data
+"Relationship between O horizon depth  
+and A horizon depth",   #title
+"O horizon depth (cm)",  #xlab
+"A horizon depth (cm)",  #ylab
+OA.graphpairs.df$totalO_thk,  #xcolumn
+OA.graphpairs.df$A_thk,   #ycolumn
+OA.graphpairs.df$treatment, #color_grp
+"Treatment")              #l.title.one (legend title)
 
 class(O_plot)
 print(O_plot)
 
-#run the function
-
-O_plot <- O_plot.FUN(OA.graphpairs.df,
-"OA_plot_test2.png",
-"Relationship between O horizon depth
-and A horizon depth", 
-"O horizon depth (cm)", 
-"A horizon depth (cm)",
-OA.graphpairs.df$totalO_thk,
-OA.graphpairs.df$A_thk,
-OA.graphpairs.df$site, 
-"Treatment")  #color and shape
-
-```
-
-
-
-```{r }
-
 
 
 ```
+
